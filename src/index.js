@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import connection from './database/mongo.js';
-import 'dotenv/config.js'
+import 'dotenv/config'
 
 const app = express();
 
