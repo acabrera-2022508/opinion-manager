@@ -1,6 +1,7 @@
 import express from 'express';
 import isLoggedIn from '../middlewares/isLoggedIn.js';
 import Post from '../models/post.model.js';
+import User from '../models/user.model.js';
 import Comment from '../models/comment.model.js';
 
 const router = express.Router();
@@ -82,6 +83,20 @@ router.delete('/:idComment', isLoggedIn, async (req, res) => {
         .json({ message: 'You are not the author of this comment' });
     }
 
+    // Remove comment from user
+    user.comments = user.comments.filter(
+      (comment) => comment.toString() !== idComment
+    );
+    await user.save();
+
+    // Remove comment from post
+    const post = await Post.findOne({ comments: idComment });
+    post.comments = post.comments.filter(
+      (comment) => comment.toString() !== idComment
+    );
+    await post.save();
+
+    // Remove comment
     await Comment.findByIdAndDelete(idComment);
 
     return res.json({ message: 'Comment removed' });
