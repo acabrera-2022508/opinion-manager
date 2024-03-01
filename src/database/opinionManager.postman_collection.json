@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "f1fb12ed-67a9-4789-ba38-a7f9fb48b978",
+		"name": "opinionManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13659864"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "getPosts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base-url}}/post/all"
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Title test",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum asimet",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "General",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/post/create"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Title UPDATE",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum asimet UPDATE",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "General",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/post/update/65e20b8be515b6aa084254c2"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/post/delete/:idPost",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"post",
+								"delete",
+								":idPost"
+							],
+							"variable": [
+								{
+									"key": "idPost",
+									"value": "65e20da7da2fcf64938e2583"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Ander",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Cabrera",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ander@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "acabrera",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "myComments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base-url}}/user/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "myPosts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base-url}}/user/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base-url}}/user/profile"
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Deran",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "rare",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ander@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "acabrera",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/user/update"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/user/update/password"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "THIS IS MY COMMENT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/comment/:idPost",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"comment",
+								":idPost"
+							],
+							"variable": [
+								{
+									"key": "idPost",
+									"value": "65e20da7da2fcf64938e2583"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateComment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "UPDATE COMMENT TEST",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/comment/:idComment",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"comment",
+								":idComment"
+							],
+							"variable": [
+								{
+									"key": "idComment",
+									"value": "65e20db4da2fcf64938e258c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteComment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/comment/:idComment",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"comment",
+								":idComment"
+							],
+							"variable": [
+								{
+									"key": "idComment",
+									"value": "65e20db4da2fcf64938e258c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "getCategories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base-url}}/category/all"
+					},
+					"response": []
+				},
+				{
+					"name": "createCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Games",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base-url}}/category/create"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-value}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/category/delete/:id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"category",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65e20a770c37eeba8e686140"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.globals.set(\"base-url\", \"http://localhost:3000\");",
+					"pm.globals.set(\"token-value\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWUyMGE3NzBjMzdlZWJhOGU2ODYxM2YiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MDkzMTI2MzIsImV4cCI6MTcwOTM5OTAzMn0.M4XqEx6hydspAoI0uKX85VOtH-Q0v9JISxlYzLRNAg8\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
