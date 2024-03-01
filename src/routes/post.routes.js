@@ -2,6 +2,7 @@ import express from 'express';
 import isLoggedIn from '../middlewares/isLoggedIn.js';
 import User from '../models/user.model.js';
 import Post from '../models/post.model.js';
+import Comment from '../models/comment.model.js';
 import Category from '../models/category.model.js';
 
 const router = express.Router();
@@ -17,6 +18,14 @@ router.get('/all', isLoggedIn, async (req, res) => {
       .populate({
         path: 'category',
         select: '-_id name',
+      })
+      .populate({
+        path: 'comments',
+        select: '-__v -_id',
+        populate: {
+          path: 'author',
+          select: '-_id name lastName username',
+        },
       });
 
     res.json(posts);
@@ -124,14 +133,30 @@ router.delete('/delete/:id', isLoggedIn, async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized is not your post' });
     }
 
+    // delete comments of all users
+    const comments = await Comment.find({ _id: { $in: post.comments } });
+
+    for (const comment of comments) {
+      await Comment.findByIdAndDelete(comment._id);
+
+      const userComment = await User.findById(comment.author);
+      userComment.comments = userComment.comments.filter(
+        (comment) => comment.toString() !== comment._id.toString()
+      );
+
+      await userComment.save();
+    }
+
     await Post.findByIdAndDelete(postId);
 
-    // delete all comments from the post
-    // await Comment.deleteMany({ _id: { $in: post.comments } });
-
-    user.posts = user.posts.filter((post) => post.toString() !== postId);
-
-    await user.save();
+    // delete post from user
+    user.posts.forEach(async (post, index) => {
+      console.log(post.toString());
+      if (post.toString() === postId) {
+        user.posts.splice(index, 1);
+        await user.save();
+      }
+    });
 
     res.json({ message: 'Post deleted' });
   } catch (error) {

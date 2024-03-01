@@ -5,6 +5,7 @@ import cors from 'cors';
 import connection from './database/mongo.js';
 import userRoutes from './routes/user.routes.js';
 import postRoutes from './routes/post.routes.js';
+import commentRoutes from './routes/comment.routes.js';
 import User from './models/user.model.js';
 import Category from './models/category.model.js';
 import { hashPassword } from './helpers/bcrypt.js';
@@ -22,6 +23,7 @@ app.use(cors());
 // Routes
 app.use('/user', userRoutes);
 app.use('/post', postRoutes);
+app.use('/comment', commentRoutes);
 
 // Start server
 connection()
