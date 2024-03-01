@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import connection from './database/mongo.js';
+import userRoutes from './routes/user.routes.js';
 import 'dotenv/config'
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(helmet());
 app.use(cors());
 
 // Routes
+app.use('/user', userRoutes);
 
 // Start server
 connection().then(() => {
