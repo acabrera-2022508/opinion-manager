@@ -37,4 +37,58 @@ router.post('/:idPost', isLoggedIn, async (req, res) => {
   }
 });
 
+router.put('/:idComment', isLoggedIn, async (req, res) => {
+  try {
+    const { idComment } = req.params;
+    const { content } = req.body;
+    const user = req.user;
+
+    const comment = await Comment.findById(idComment);
+
+    if (!comment) {
+      return res.status(400).json({ message: 'Comment not found' });
+    }
+
+    if (comment.author.toString() !== user._id.toString()) {
+      return res
+        .status(400)
+        .json({ message: 'You are not the author of this comment' });
+    }
+
+    comment.content = content;
+    await comment.save();
+
+    return res.json(comment);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.delete('/:idComment', isLoggedIn, async (req, res) => {
+  try {
+    const { idComment } = req.params;
+    const user = req.user;
+
+    const comment = await Comment.findById(idComment);
+
+    if (!comment) {
+      return res.status(400).json({ message: 'Comment not found' });
+    }
+
+    if (comment.author.toString() !== user._id.toString()) {
+      return res
+        .status(400)
+        .json({ message: 'You are not the author of this comment' });
+    }
+
+    await Comment.findByIdAndDelete(idComment);
+
+    return res.json({ message: 'Comment removed' });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export default router;

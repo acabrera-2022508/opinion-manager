@@ -151,7 +151,6 @@ router.delete('/delete/:id', isLoggedIn, async (req, res) => {
 
     // delete post from user
     user.posts.forEach(async (post, index) => {
-      console.log(post.toString());
       if (post.toString() === postId) {
         user.posts.splice(index, 1);
         await user.save();
