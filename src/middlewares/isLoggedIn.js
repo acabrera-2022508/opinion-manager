@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import User from '../models/user.model.js';
 
-export const isLoggedIn = async (req, res, next) => {
+const isLoggedIn = async (req, res, next) => {
   try {
     const { token } = req.headers;
 
@@ -11,7 +11,7 @@ export const isLoggedIn = async (req, res, next) => {
     }
 
     const { uid } = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     const user = await User.findById(uid);
 
     if (!user) {
@@ -26,3 +26,5 @@ export const isLoggedIn = async (req, res, next) => {
     res.status(401).json({ message: 'Invalid token or expired' });
   }
 };
+
+export default isLoggedIn;

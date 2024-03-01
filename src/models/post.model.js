@@ -4,18 +4,28 @@ const postSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
+    required: true,
   },
   title: {
     type: String,
-    required: false,
+    required: [true, 'Title is required']
   },
   content: {
     type: String,
-    required: true,
+    required: [true, 'Content is required'],
+  },
+  comments: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
   },
 });
 

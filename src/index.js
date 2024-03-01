@@ -4,7 +4,9 @@ import helmet from 'helmet';
 import cors from 'cors';
 import connection from './database/mongo.js';
 import userRoutes from './routes/user.routes.js';
+import postRoutes from './routes/post.routes.js';
 import User from './models/user.model.js';
+import Category from './models/category.model.js';
 import { hashPassword } from './helpers/bcrypt.js';
 import 'dotenv/config';
 
@@ -19,6 +21,7 @@ app.use(cors());
 
 // Routes
 app.use('/user', userRoutes);
+app.use('/post', postRoutes);
 
 // Start server
 connection()
@@ -33,8 +36,14 @@ connection()
       comments: [],
     });
 
-    const users = await User.find({});
+    const category = new Category({
+      name: 'General',
+    });
 
+    const users = await User.find({});
+    const categories = await Category.find({});
+
+    if (categories.length === 0) category.save();
     if (users.length === 0) user.save();
   })
   .then(() => {
