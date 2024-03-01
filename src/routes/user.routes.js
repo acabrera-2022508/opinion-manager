@@ -23,7 +23,7 @@ router.get('/comments', isLoggedIn, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate({
       path: 'comments',
-      select: '-__v -_id',
+      select: '-__v',
       populate: {
         path: 'author',
         select: '-_id name lastName username',
